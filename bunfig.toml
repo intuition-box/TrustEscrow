@@ -1,0 +1,12 @@
+[install]
+# Enable workspaces
+workspaces = true
+
+[install.scopes]
+# Configure scopes for the monorepo
+"@se-2" = "packages/*"
+
+[scripts]
+# Pre-install hook for husky
+preinstall = "husky install"
+

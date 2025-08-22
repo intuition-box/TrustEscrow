@@ -1,0 +1,43 @@
+name: Lint
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  ci:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        node: [lts/*]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: bun
+
+      - name: Install dependencies
+        run: bun install
+      
+      - name: Start local network and deploy contracts
+        run: bun run chain & bun run deploy
+
+      - name: Lint Hardhat
+        run: bun run hardhat:lint --max-warnings=0
+
+      - name: Lint Next.js
+        run: bun run next:lint --max-warnings=0
+
+      - name: Check types Next.js
+        run: bun run next:check-types

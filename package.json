@@ -1,0 +1,62 @@
+{
+  "name": "se-2",
+  "version": "0.0.1",
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ]
+  },
+  "scripts": {
+    "account": "bun run hardhat:account",
+    "account:generate": "bun run --cwd packages/hardhat account:generate",
+    "account:import": "bun run --cwd packages/hardhat account:import",
+    "account:reveal-pk": "bun run --cwd packages/hardhat account:reveal-pk",
+    "chain": "bun run hardhat:chain",
+    "compile": "bun run hardhat:compile",
+    "deploy": "bun run hardhat:deploy",
+    "fork": "bun run hardhat:fork",
+    "format": "bun run next:format && bun run hardhat:format",
+    "generate": "bun run account:generate",
+    "hardhat:account": "bun run --cwd packages/hardhat account",
+    "hardhat:chain": "bun run --cwd packages/hardhat chain",
+    "hardhat:check-types": "bun run --cwd packages/hardhat check-types",
+    "hardhat:clean": "bun run --cwd packages/hardhat clean",
+    "hardhat:compile": "bun run --cwd packages/hardhat compile",
+    "hardhat:deploy": "bun run --cwd packages/hardhat deploy",
+    "hardhat:flatten": "bun run --cwd packages/hardhat flatten",
+    "hardhat:fork": "bun run --cwd packages/hardhat fork",
+    "hardhat:format": "bun run --cwd packages/hardhat format",
+    "hardhat:generate": "bun run --cwd packages/hardhat generate",
+    "hardhat:hardhat-verify": "bun run --cwd packages/hardhat hardhat-verify",
+    "hardhat:lint": "bun run --cwd packages/hardhat lint",
+    "hardhat:lint-staged": "bun run --cwd packages/hardhat lint-staged",
+    "hardhat:test": "bun run --cwd packages/hardhat test",
+    "hardhat:verify": "bun run --cwd packages/hardhat verify",
+    "postinstall": "husky install",
+    "ipfs": "bun run --cwd packages/nextjs ipfs",
+    "lint": "bun run next:lint && bun run hardhat:lint",
+    "next:build": "bun run --cwd packages/nextjs build",
+    "next:check-types": "bun run --cwd packages/nextjs check-types",
+    "next:format": "bun run --cwd packages/nextjs format",
+    "next:lint": "bun run --cwd packages/nextjs lint",
+    "next:serve": "bun run --cwd packages/nextjs serve",
+    "precommit": "lint-staged",
+    "start": "bun run --cwd packages/nextjs dev",
+    "test": "bun run hardhat:test",
+    "vercel": "bun run --cwd packages/nextjs vercel",
+    "vercel:login": "bun run --cwd packages/nextjs vercel:login",
+    "vercel:yolo": "bun run --cwd packages/nextjs vercel:yolo",
+    "verify": "bun run hardhat:verify",
+    "demo:escrow": "bun run hardhat:demo:escrow",
+    "demo:factory": "bun run hardhat:demo:factory"
+  },
+  "devDependencies": {
+    "husky": "~9.1.6",
+    "lint-staged": "~13.2.2"
+  },
+  "packageManager": "bun@1.0.0",
+  "engines": {
+    "node": ">=20.18.3"
+  }
+}
