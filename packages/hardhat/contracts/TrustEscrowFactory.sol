@@ -11,6 +11,14 @@ import "@openzeppelin/contracts/utils/Pausable.sol";
  * @author Your Name
  */
 contract TrustEscrowFactory is Ownable, Pausable {
+    // Custom errors
+    error InvalidAddress();
+    error ArraysLengthMismatch();
+    error EmptyArrays();
+    error TooManyEscrows();
+    error EscrowDoesNotExist();
+    error FactoryIsPaused();
+
     // Array to store all created escrow addresses
     address[] public escrows;
     
@@ -59,11 +67,11 @@ contract TrustEscrowFactory is Ownable, Pausable {
         address _beneficiary,
         address _arbiter
     ) internal returns (address escrowAddress) {
-        require(_beneficiary != address(0), "Invalid beneficiary address");
-        require(_arbiter != address(0), "Invalid arbiter address");
-        require(_beneficiary != _arbiter, "Beneficiary cannot be arbiter");
-        require(_beneficiary != msg.sender, "Depositor cannot be beneficiary");
-        require(_arbiter != msg.sender, "Depositor cannot be arbiter");
+        if (_beneficiary == address(0)) revert InvalidAddress();
+        if (_arbiter == address(0)) revert InvalidAddress();
+        if (_beneficiary == _arbiter) revert InvalidAddress();
+        if (_beneficiary == msg.sender) revert InvalidAddress();
+        if (_arbiter == msg.sender) revert InvalidAddress();
         
         // Create new escrow contract
         TrustEscrow escrow = new TrustEscrow(msg.sender, _beneficiary, _arbiter);
@@ -117,12 +125,9 @@ contract TrustEscrowFactory is Ownable, Pausable {
         address[] calldata _beneficiaries,
         address[] calldata _arbiters
     ) external whenNotPaused returns (address[] memory escrowAddresses) {
-        require(
-            _beneficiaries.length == _arbiters.length,
-            "Arrays length mismatch"
-        );
-        require(_beneficiaries.length > 0, "Empty arrays");
-        require(_beneficiaries.length <= 10, "Too many escrows at once");
+        if (_beneficiaries.length != _arbiters.length) revert ArraysLengthMismatch();
+        if (_beneficiaries.length == 0) revert EmptyArrays();
+        if (_beneficiaries.length > 10) revert TooManyEscrows();
         
         escrowAddresses = new address[](_beneficiaries.length);
         
@@ -162,7 +167,7 @@ contract TrustEscrowFactory is Ownable, Pausable {
      * @return EscrowInfo struct containing escrow details
      */
     function getEscrowInfo(address _escrow) external view returns (EscrowInfo memory) {
-        require(escrowInfo[_escrow].exists, "Escrow does not exist");
+        if (!escrowInfo[_escrow].exists) revert EscrowDoesNotExist();
         return escrowInfo[_escrow];
     }
     

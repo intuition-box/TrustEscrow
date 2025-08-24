@@ -7,7 +7,7 @@ import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract";
 const deployedContracts = {
   31337: {
     TrustEscrow: {
-      address: "0x851356ae760d987E095750cCeb3bC6014560891C",
+      address: "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
       abi: [
         {
           inputs: [
@@ -32,12 +32,52 @@ const deployedContracts = {
         },
         {
           inputs: [],
+          name: "AlreadyFunded",
+          type: "error",
+        },
+        {
+          inputs: [],
+          name: "AlreadyReleased",
+          type: "error",
+        },
+        {
+          inputs: [],
           name: "EnforcedPause",
           type: "error",
         },
         {
           inputs: [],
           name: "ExpectedPause",
+          type: "error",
+        },
+        {
+          inputs: [],
+          name: "InvalidAddress",
+          type: "error",
+        },
+        {
+          inputs: [],
+          name: "InvalidAmount",
+          type: "error",
+        },
+        {
+          inputs: [],
+          name: "NotFunded",
+          type: "error",
+        },
+        {
+          inputs: [],
+          name: "OnlyArbiter",
+          type: "error",
+        },
+        {
+          inputs: [],
+          name: "OnlyDepositor",
+          type: "error",
+        },
+        {
+          inputs: [],
+          name: "OnlyDepositorCanSendETH",
           type: "error",
         },
         {
@@ -431,10 +471,10 @@ const deployedContracts = {
         renounceOwnership: "@openzeppelin/contracts/access/Ownable.sol",
         transferOwnership: "@openzeppelin/contracts/access/Ownable.sol",
       },
-      deployedOnBlock: 44,
+      deployedOnBlock: 3,
     },
     TrustEscrowFactory: {
-      address: "0xf5059a5D33d5853360D16C683c16e67980206f36",
+      address: "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0",
       abi: [
         {
           inputs: [],
@@ -443,12 +483,37 @@ const deployedContracts = {
         },
         {
           inputs: [],
+          name: "ArraysLengthMismatch",
+          type: "error",
+        },
+        {
+          inputs: [],
+          name: "EmptyArrays",
+          type: "error",
+        },
+        {
+          inputs: [],
           name: "EnforcedPause",
           type: "error",
         },
         {
           inputs: [],
+          name: "EscrowDoesNotExist",
+          type: "error",
+        },
+        {
+          inputs: [],
           name: "ExpectedPause",
+          type: "error",
+        },
+        {
+          inputs: [],
+          name: "FactoryIsPaused",
+          type: "error",
+        },
+        {
+          inputs: [],
+          name: "InvalidAddress",
           type: "error",
         },
         {
@@ -471,6 +536,11 @@ const deployedContracts = {
             },
           ],
           name: "OwnableUnauthorizedAccount",
+          type: "error",
+        },
+        {
+          inputs: [],
+          name: "TooManyEscrows",
           type: "error",
         },
         {
@@ -935,10 +1005,10 @@ const deployedContracts = {
         transferOwnership: "@openzeppelin/contracts/access/Ownable.sol",
         paused: "@openzeppelin/contracts/utils/Pausable.sol",
       },
-      deployedOnBlock: 45,
+      deployedOnBlock: 4,
     },
     YourContract: {
-      address: "0x322813Fd9A801c5507c9de605d63CEA4f2CE6c44",
+      address: "0x5FbDB2315678afecb367f032d93F642f64180aa3",
       abi: [
         {
           inputs: [
@@ -1079,7 +1149,7 @@ const deployedContracts = {
         },
       ],
       inheritedFunctions: {},
-      deployedOnBlock: 28,
+      deployedOnBlock: 1,
     },
   },
 } as const;

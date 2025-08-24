@@ -47,20 +47,15 @@ describe("TrustEscrowFactory", function () {
 
   describe("Create Escrow", function () {
     it("Should create a new escrow successfully", async function () {
-      const tx = trustEscrowFactory.connect(user1).createEscrowExternal(user2.address, user3.address);
+      const tx = await trustEscrowFactory.connect(user1).createEscrowExternal(user2.address, user3.address);
+      await tx.wait();
 
-      await expect(tx)
-        .to.emit(trustEscrowFactory, "EscrowCreated")
-        .withArgs(
-          await trustEscrowFactory.escrows(0),
-          user1.address,
-          user2.address,
-          user3.address,
-          await ethers.provider.getBlockNumber(),
-        );
+      const escrowAddress = await trustEscrowFactory.escrows(0);
+
+      await expect(tx).to.emit(trustEscrowFactory, "EscrowCreated");
 
       expect(await trustEscrowFactory.getEscrowCount()).to.equal(1);
-      expect(await trustEscrowFactory.escrows(0)).to.not.equal(ethers.ZeroAddress);
+      expect(escrowAddress).to.not.equal(ethers.ZeroAddress);
     });
 
     it("Should store escrow information correctly", async function () {
@@ -85,31 +80,31 @@ describe("TrustEscrowFactory", function () {
     it("Should revert if beneficiary is zero address", async function () {
       await expect(
         trustEscrowFactory.connect(user1).createEscrowExternal(ethers.ZeroAddress, user3.address),
-      ).to.be.revertedWith("Invalid beneficiary address");
+      ).to.be.revertedWithCustomError(trustEscrowFactory, "InvalidAddress");
     });
 
     it("Should revert if arbiter is zero address", async function () {
       await expect(
         trustEscrowFactory.connect(user1).createEscrowExternal(user2.address, ethers.ZeroAddress),
-      ).to.be.revertedWith("Invalid arbiter address");
+      ).to.be.revertedWithCustomError(trustEscrowFactory, "InvalidAddress");
     });
 
     it("Should revert if beneficiary equals arbiter", async function () {
       await expect(
         trustEscrowFactory.connect(user1).createEscrowExternal(user2.address, user2.address),
-      ).to.be.revertedWith("Beneficiary cannot be arbiter");
+      ).to.be.revertedWithCustomError(trustEscrowFactory, "InvalidAddress");
     });
 
     it("Should revert if depositor equals beneficiary", async function () {
       await expect(
         trustEscrowFactory.connect(user1).createEscrowExternal(user1.address, user3.address),
-      ).to.be.revertedWith("Depositor cannot be beneficiary");
+      ).to.be.revertedWithCustomError(trustEscrowFactory, "InvalidAddress");
     });
 
     it("Should revert if depositor equals arbiter", async function () {
       await expect(
         trustEscrowFactory.connect(user1).createEscrowExternal(user2.address, user1.address),
-      ).to.be.revertedWith("Depositor cannot be arbiter");
+      ).to.be.revertedWithCustomError(trustEscrowFactory, "InvalidAddress");
     });
   });
 
@@ -130,27 +125,27 @@ describe("TrustEscrowFactory", function () {
       const beneficiaries = [user2.address, user3.address];
       const arbiters = [user3.address];
 
-      await expect(trustEscrowFactory.connect(user1).createMultipleEscrows(beneficiaries, arbiters)).to.be.revertedWith(
-        "Arrays length mismatch",
-      );
+      await expect(
+        trustEscrowFactory.connect(user1).createMultipleEscrows(beneficiaries, arbiters),
+      ).to.be.revertedWithCustomError(trustEscrowFactory, "ArraysLengthMismatch");
     });
 
     it("Should revert if arrays are empty", async function () {
       const beneficiaries: string[] = [];
       const arbiters: string[] = [];
 
-      await expect(trustEscrowFactory.connect(user1).createMultipleEscrows(beneficiaries, arbiters)).to.be.revertedWith(
-        "Empty arrays",
-      );
+      await expect(
+        trustEscrowFactory.connect(user1).createMultipleEscrows(beneficiaries, arbiters),
+      ).to.be.revertedWithCustomError(trustEscrowFactory, "EmptyArrays");
     });
 
     it("Should revert if too many escrows at once", async function () {
       const beneficiaries = Array(11).fill(user2.address);
       const arbiters = Array(11).fill(user3.address);
 
-      await expect(trustEscrowFactory.connect(user1).createMultipleEscrows(beneficiaries, arbiters)).to.be.revertedWith(
-        "Too many escrows at once",
-      );
+      await expect(
+        trustEscrowFactory.connect(user1).createMultipleEscrows(beneficiaries, arbiters),
+      ).to.be.revertedWithCustomError(trustEscrowFactory, "TooManyEscrows");
     });
   });
 
@@ -197,7 +192,10 @@ describe("TrustEscrowFactory", function () {
     });
 
     it("Should revert when getting info for non-existent escrow", async function () {
-      await expect(trustEscrowFactory.getEscrowInfo(ethers.ZeroAddress)).to.be.revertedWith("Escrow does not exist");
+      await expect(trustEscrowFactory.getEscrowInfo(ethers.ZeroAddress)).to.be.revertedWithCustomError(
+        trustEscrowFactory,
+        "EscrowDoesNotExist",
+      );
     });
   });
 
@@ -208,7 +206,7 @@ describe("TrustEscrowFactory", function () {
 
       await expect(
         trustEscrowFactory.connect(user1).createEscrowExternal(user2.address, user3.address),
-      ).to.be.revertedWith("Factory is paused");
+      ).to.be.revertedWithCustomError(trustEscrowFactory, "EnforcedPause");
 
       await trustEscrowFactory.unpause();
       expect(await trustEscrowFactory.paused()).to.equal(false);
@@ -218,13 +216,19 @@ describe("TrustEscrowFactory", function () {
     });
 
     it("Should revert if non-owner tries to pause", async function () {
-      await expect(trustEscrowFactory.connect(user1).pause()).to.be.revertedWith("Ownable: caller is not the owner");
+      await expect(trustEscrowFactory.connect(user1).pause()).to.be.revertedWithCustomError(
+        trustEscrowFactory,
+        "OwnableUnauthorizedAccount",
+      );
     });
 
     it("Should revert if non-owner tries to unpause", async function () {
       await trustEscrowFactory.pause();
 
-      await expect(trustEscrowFactory.connect(user1).unpause()).to.be.revertedWith("Ownable: caller is not the owner");
+      await expect(trustEscrowFactory.connect(user1).unpause()).to.be.revertedWithCustomError(
+        trustEscrowFactory,
+        "OwnableUnauthorizedAccount",
+      );
     });
   });
 

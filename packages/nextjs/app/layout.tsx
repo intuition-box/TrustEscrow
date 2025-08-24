@@ -2,11 +2,12 @@ import "@rainbow-me/rainbowkit/styles.css";
 import { ScaffoldEthAppWithProviders } from "~~/components/ScaffoldEthAppWithProviders";
 import { ThemeProvider } from "~~/components/ThemeProvider";
 import "~~/styles/globals.css";
+import "~~/styles/trust-escrow.css";
 import { getMetadata } from "~~/utils/scaffold-eth/getMetadata";
 
 export const metadata = getMetadata({
-  title: "Scaffold-ETH 2 App",
-  description: "Built with 🏗 Scaffold-ETH 2",
+  title: "TrustEscrow - Secure Decentralized Escrow Platform",
+  description: "A secure, decentralized escrow platform built on Ethereum with smart contract protection",
 });
 
 const ScaffoldEthApp = ({ children }: { children: React.ReactNode }) => {

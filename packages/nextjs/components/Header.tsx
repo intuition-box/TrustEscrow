@@ -1,10 +1,11 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { hardhat } from "viem/chains";
+import { useAccount } from "wagmi";
 import { Bars3Icon, BugAntIcon } from "@heroicons/react/24/outline";
 import { FaucetButton, RainbowKitCustomConnectButton } from "~~/components/scaffold-eth";
 import { useOutsideClick, useTargetNetwork } from "~~/hooks/scaffold-eth";
@@ -19,6 +20,10 @@ export const menuLinks: HeaderMenuLink[] = [
   {
     label: "Home",
     href: "/",
+  },
+  {
+    label: "Trust Escrow",
+    href: "/escrow",
   },
   {
     label: "Debug Contracts",
@@ -58,7 +63,14 @@ export const HeaderMenuLinks = () => {
  */
 export const Header = () => {
   const { targetNetwork } = useTargetNetwork();
-  const isLocalNetwork = targetNetwork.id === hardhat.id;
+  const { isConnected, address } = useAccount();
+  const [mounted, setMounted] = useState(false);
+
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const isLocalNetwork = mounted && targetNetwork.id === hardhat.id;
 
   const burgerMenuRef = useRef<HTMLDetailsElement>(null);
   useOutsideClick(burgerMenuRef, () => {
@@ -86,17 +98,40 @@ export const Header = () => {
             <Image alt="SE2 logo" className="cursor-pointer" fill src="/logo.svg" />
           </div>
           <div className="flex flex-col">
-            <span className="font-bold leading-tight">Scaffold-ETH</span>
-            <span className="text-xs">Ethereum dev stack</span>
+            <span className="font-bold leading-tight">TrustEscrow</span>
+            <span className="text-xs">Secure Escrow Platform</span>
           </div>
         </Link>
         <ul className="hidden lg:flex lg:flex-nowrap menu menu-horizontal px-1 gap-2">
           <HeaderMenuLinks />
         </ul>
       </div>
-      <div className="navbar-end grow mr-4">
-        <RainbowKitCustomConnectButton />
-        {isLocalNetwork && <FaucetButton />}
+      <div className="navbar-end flex items-center gap-2 mr-4">
+        {/* Debug Info - Only show on localhost */}
+        {isLocalNetwork && (
+          <div className="hidden lg:block text-xs text-base-content/70 bg-base-200 p-2 rounded-lg">
+            <div>Network: {targetNetwork.name}</div>
+            <div>Chain ID: {targetNetwork.id}</div>
+            <div>Connected: {isConnected ? "Yes" : "No"}</div>
+            {address && (
+              <div>
+                Address: {address.slice(0, 6)}...{address.slice(-4)}
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* Wallet Connection Button */}
+        <div className="flex-shrink-0">
+          <RainbowKitCustomConnectButton />
+        </div>
+
+        {/* Faucet Button - Only show on localhost */}
+        {isLocalNetwork && (
+          <div className="flex-shrink-0">
+            <FaucetButton />
+          </div>
+        )}
       </div>
     </div>
   );

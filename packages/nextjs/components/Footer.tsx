@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { hardhat } from "viem/chains";
 import { CurrencyDollarIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
@@ -15,7 +17,30 @@ import { useGlobalState } from "~~/services/store/store";
 export const Footer = () => {
   const nativeCurrencyPrice = useGlobalState(state => state.nativeCurrency.price);
   const { targetNetwork } = useTargetNetwork();
-  const isLocalNetwork = targetNetwork.id === hardhat.id;
+  const [mounted, setMounted] = useState(false);
+
+  // Fix hydration issues
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const isLocalNetwork = mounted && targetNetwork.id === hardhat.id;
+
+  if (!mounted) {
+    return (
+      <div className="min-h-0 py-5 px-1 mb-11 lg:mb-0">
+        <div className="w-full">
+          <ul className="menu menu-horizontal w-full">
+            <div className="flex justify-center items-center gap-2 text-sm w-full">
+              <div className="text-center">
+                <span className="link">TrustEscrow</span>
+              </div>
+            </div>
+          </ul>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-0 py-5 px-1 mb-11 lg:mb-0">
@@ -48,7 +73,7 @@ export const Footer = () => {
           <div className="flex justify-center items-center gap-2 text-sm w-full">
             <div className="text-center">
               <a href="https://github.com/scaffold-eth/se-2" target="_blank" rel="noreferrer" className="link">
-                Fork me
+                TrustEscrow
               </a>
             </div>
             <span>·</span>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
 import { createWalletClient, http, parseEther } from "viem";
 import { hardhat } from "viem/chains";
 import { useAccount } from "wagmi";
@@ -44,6 +44,18 @@ export const FaucetButton = () => {
       setLoading(false);
     }
   };
+
+  // Use useEffect to prevent hydration mismatch
+  const [mounted, setMounted] = useState(false);
+
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Don't render until mounted to prevent hydration mismatch
+  if (!mounted) {
+    return null;
+  }
 
   // Render only on local chain
   if (ConnectedChain?.id !== hardhat.id) {

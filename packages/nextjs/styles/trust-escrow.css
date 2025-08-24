@@ -1,0 +1,437 @@
+/* Trust Escrow Custom Styles */
+
+/* Black theme colors */
+.bg-card { 
+  background-color: #111111; 
+}
+
+.bg-muted { 
+  background-color: #1a1a1a; 
+}
+
+.text-muted-foreground { 
+  color: #888888; 
+}
+
+.border { 
+  border-color: #333333; 
+}
+
+.hover\:bg-accent:hover { 
+  background-color: #1a1a1a; 
+}
+
+/* Button styles */
+.btn {
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.btn-primary {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.btn-primary:hover {
+  background-color: #f0f0f0;
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background-color: #333333;
+  color: #ffffff;
+  border: 1px solid #555555;
+}
+
+.btn-secondary:hover {
+  background-color: #444444;
+  border-color: #666666;
+  transform: translateY(-1px);
+}
+
+.btn-sm {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Input styles */
+.input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #333333;
+  border-radius: 0.375rem;
+  background-color: #111111;
+  color: #ffffff;
+  transition: all 0.2s;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
+}
+
+/* Card styles */
+.card {
+  background-color: #111111;
+  border: 1px solid #333333;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  border-color: #444444;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Role-based border colors */
+.role-depositor { 
+  border-left: 4px solid #10b981; 
+}
+
+.role-arbiter { 
+  border-left: 4px solid #f59e0b; 
+}
+
+.role-beneficiary { 
+  border-left: 4px solid #3b82f6; 
+}
+
+/* Utility classes */
+.hidden { 
+  display: none; 
+}
+
+.flex { 
+  display: flex; 
+}
+
+.grid { 
+  display: grid; 
+}
+
+.items-center { 
+  align-items: center; 
+}
+
+.justify-between { 
+  justify-content: space-between; 
+}
+
+.gap-4 { 
+  gap: 1rem; 
+}
+
+.gap-2 { 
+  gap: 0.5rem; 
+}
+
+.p-4 { 
+  padding: 1rem; 
+}
+
+.p-6 { 
+  padding: 1.5rem; 
+}
+
+.p-3 {
+  padding: 0.75rem;
+}
+
+.mb-4 { 
+  margin-bottom: 1rem; 
+}
+
+.mb-6 { 
+  margin-bottom: 1.5rem; 
+}
+
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
+
+.mt-4 {
+  margin-top: 1rem;
+}
+
+.text-xl { 
+  font-size: 1.25rem; 
+}
+
+.text-2xl { 
+  font-size: 1.5rem; 
+}
+
+.font-bold { 
+  font-weight: 700; 
+}
+
+.font-semibold {
+  font-weight: 600;
+}
+
+.text-center { 
+  text-align: center; 
+}
+
+.max-w-4xl { 
+  max-width: 56rem; 
+}
+
+.mx-auto { 
+  margin-left: auto; 
+  margin-right: auto; 
+}
+
+.min-h-screen { 
+  min-height: 100vh; 
+}
+
+.w-full {
+  width: 100%;
+}
+
+.text-sm {
+  font-size: 0.875rem;
+}
+
+.rounded {
+  border-radius: 0.25rem;
+}
+
+.rounded-lg {
+  border-radius: 0.5rem;
+}
+
+.py-8 {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.space-y-4 > * + * {
+  margin-top: 1rem;
+}
+
+.space-y-2 > * + * {
+  margin-top: 0.5rem;
+}
+
+/* Responsive grid */
+@media (min-width: 768px) {
+  .md\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  
+  .md\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .lg\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Font utilities */
+.font-mono {
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+}
+
+/* Animation */
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Status badge colors */
+.bg-green-900 { 
+  background-color: #14532d; 
+}
+
+.text-green-300 { 
+  color: #86efac; 
+}
+
+.bg-yellow-900 { 
+  background-color: #713f12; 
+}
+
+.text-yellow-300 { 
+  color: #fde047; 
+}
+
+.bg-blue-900 { 
+  background-color: #1e3a8a; 
+}
+
+.text-blue-300 { 
+  color: #93c5fd; 
+}
+
+.bg-gray-900 { 
+  background-color: #111827; 
+}
+
+.text-gray-300 { 
+  color: #d1d5db; 
+}
+
+/* Modal styles */
+.fixed {
+  position: fixed;
+}
+
+.inset-0 {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.bg-opacity-50 {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.z-50 {
+  z-index: 50;
+}
+
+.max-w-md {
+  max-width: 28rem;
+}
+
+.flex-1 {
+  flex: 1 1 0%;
+}
+
+.break-all {
+  word-break: break-all;
+}
+
+/* Additional utility classes */
+.items-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.mx-4 {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.space-y-1 > * + * {
+  margin-top: 0.25rem;
+}
+
+.space-y-2 > * + * {
+  margin-top: 0.5rem;
+}
+
+.space-y-4 > * + * {
+  margin-top: 1rem;
+}
+
+/* Grid utilities */
+.grid-cols-1 {
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+.grid-cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.gap-4 {
+  gap: 1rem;
+}
+
+.gap-2 {
+  gap: 0.5rem;
+}
+
+.gap-3 {
+  gap: 0.75rem;
+}
+
+/* Text utilities */
+.text-xs {
+  font-size: 0.75rem;
+}
+
+.text-lg {
+  font-size: 1.125rem;
+}
+
+/* Button utilities */
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+/* Warning and Info Boxes */
+.bg-yellow-900\/20 {
+  background-color: rgba(120, 113, 108, 0.2);
+}
+
+.border-yellow-700 {
+  border-color: #a16207;
+}
+
+.text-yellow-300 {
+  color: #fde047;
+}
+
+.bg-blue-900\/20 {
+  background-color: rgba(30, 58, 138, 0.2);
+}
+
+.border-blue-700 {
+  border-color: #1d4ed8;
+}
+
+.text-blue-300 {
+  color: #93c5fd;
+}
+
+/* Success/Green colors */
+.bg-green-900\/20 {
+  background-color: rgba(20, 83, 45, 0.2);
+}
+
+.border-green-700 {
+  border-color: #15803d;
+}
+
+.text-green-300 {
+  color: #86efac;
+}
+

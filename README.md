@@ -1,80 +1,194 @@
-# 🏗 Scaffold-ETH 2
+# TrustEscrow - Secure Decentralized Escrow Platform
 
-<h4 align="center">
-  <a href="https://docs.scaffoldeth.io">Documentation</a> |
-  <a href="https://scaffoldeth.io">Website</a>
-</h4>
+A secure, decentralized escrow platform built on Ethereum with smart contract protection. This platform allows three parties (Depositor, Arbiter, and Beneficiary) to create and manage escrow agreements with trustless smart contract execution.
 
-🧪 An open-source, up-to-date toolkit for building decentralized applications (dapps) on the Ethereum blockchain. It's designed to make it easier for developers to create and deploy smart contracts and build user interfaces that interact with those contracts.
+## 🚀 Quick Start
 
-⚙️ Built using NextJS, RainbowKit, Hardhat, Wagmi, Viem, and Typescript.
+### Prerequisites
+- Node.js 18+ and Bun package manager
+- MetaMask or compatible Web3 wallet
+- Local Hardhat network running
 
-- ✅ **Contract Hot Reload**: Your frontend auto-adapts to your smart contract as you edit it.
-- 🪝 **[Custom hooks](https://docs.scaffoldeth.io/hooks/)**: Collection of React hooks wrapper around [wagmi](https://wagmi.sh/) to simplify interactions with smart contracts with typescript autocompletion.
-- 🧱 [**Components**](https://docs.scaffoldeth.io/components/): Collection of common web3 components to quickly build your frontend.
-- 🔥 **Burner Wallet & Local Faucet**: Quickly test your application with a burner wallet and local faucet.
-- 🔐 **Integration with Wallet Providers**: Connect to different wallet providers and interact with the Ethereum network.
+### 1. Start the Development Environment
 
-![Debug Contracts tab](https://github.com/scaffold-eth/scaffold-eth-2/assets/55535804/b237af0c-5027-4849-a5c1-2e31495cccb1)
+Open **3 terminal windows** and run these commands:
 
-## Requirements
-
-Before you begin, you need to install the following tools:
-
-- [Node (>= v20.18.3)](https://nodejs.org/en/download/)
-- [Bun](https://bun.sh/) (>= v1.0.0)
-- [Git](https://git-scm.com/downloads)
-
-## Quickstart
-
-To get started with Scaffold-ETH 2, follow the steps below:
-
-1. Install dependencies if it was skipped in CLI:
-
-```
-cd my-dapp-example
-bun install
-```
-
-2. Run a local network in the first terminal:
-
-```
+**Terminal 1 - Start Hardhat Node:**
+```bash
+cd packages/hardhat
 bun run chain
 ```
 
-This command starts a local Ethereum network using Hardhat. The network runs on your local machine and can be used for testing and development. You can customize the network configuration in `packages/hardhat/hardhat.config.ts`.
-
-3. On a second terminal, deploy the test contract:
-
-```
+**Terminal 2 - Deploy Contracts:**
+```bash
+cd packages/hardhat
 bun run deploy
 ```
 
-This command deploys a test smart contract to the local network. The contract is located in `packages/hardhat/contracts` and can be modified to suit your needs. The `bun run deploy` command uses the deploy script located in `packages/hardhat/deploy` to deploy the contract to the network. You can also customize the deploy script.
-
-4. On a third terminal, start your NextJS app:
-
-```
-bun run start
+**Terminal 3 - Start Frontend:**
+```bash
+cd packages/nextjs
+bun run dev
 ```
 
-Visit your app on: `http://localhost:3000`. You can interact with your smart contract using the `Debug Contracts` page. You can tweak the app config in `packages/nextjs/scaffold.config.ts`.
+### 2. Access the Application
+- Open your browser and go to `http://localhost:3000`
+- Click "Launch Escrow App" to go to `/escrow`
+- Connect your MetaMask wallet to the Hardhat network (Chain ID: 31337)
 
-Run smart contract test with `bun run hardhat:test`
+## 🏗️ How It Works
 
-- Edit your smart contracts in `packages/hardhat/contracts`
-- Edit your frontend homepage at `packages/nextjs/app/page.tsx`. For guidance on [routing](https://nextjs.org/docs/app/building-your-application/routing/defining-routes) and configuring [pages/layouts](https://nextjs.org/docs/app/building-your-application/routing/pages-and-layouts) checkout the Next.js documentation.
-- Edit your deployment scripts in `packages/hardhat/deploy`
+### Three-Party Escrow System
 
+1. **Depositor** - Creates the escrow contract and deposits funds
+2. **Arbiter** - Reviews work completion and decides to release or refund funds
+3. **Beneficiary** - Completes the work and receives payment when released
 
-## Documentation
+### Smart Contract Flow
 
-Visit our [docs](https://docs.scaffoldeth.io) to learn how to start building with Scaffold-ETH 2.
+1. **Creation**: Depositor creates escrow with beneficiary and arbiter addresses
+2. **Funding**: Depositor sends ETH to the escrow contract
+3. **Work Completion**: Beneficiary completes the agreed work
+4. **Arbitration**: Arbiter reviews and decides on fund release
+5. **Resolution**: Funds are either released to beneficiary or refunded to depositor
 
-To know more about its features, check out our [website](https://scaffoldeth.io).
+## 💻 Usage Guide
 
-## Contributing to Scaffold-ETH 2
+### Creating an Escrow
 
-We welcome contributions to Scaffold-ETH 2!
+1. **Connect Wallet**: Use the "Connect Wallet" button in the header
+2. **Fill Form**: 
+   - Escrow Title: Describe the project
+   - Description: Detailed work description
+   - Amount: ETH amount to escrow
+   - Arbiter Address: Trusted third-party address
+   - Beneficiary Address: Worker/service provider address
+   - Terms: Conditions for fund release
+3. **Submit**: Click "Create Escrow Contract"
 
-Please see [CONTRIBUTING.MD](https://github.com/scaffold-eth/scaffold-eth-2/blob/main/CONTRIBUTING.md) for more information and guidelines for contributing to Scaffold-ETH 2.
+### Managing Transactions
+
+- **My Transactions Tab**: View all escrows where you're involved
+- **Role-Based Actions**:
+  - **Depositor**: Can deposit funds if not funded
+  - **Arbiter**: Can release or refund funds
+  - **Beneficiary**: Can track transaction status
+
+### Quick Test Addresses
+
+Use these addresses for testing:
+
+- **Beneficiary**: `0x70997970C51812dc3A010C7d01b50e0d17dc79C8`
+- **Arbiter**: `0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC`
+
+## 🔧 Technical Details
+
+### Smart Contracts
+
+- **TrustEscrow.sol**: Individual escrow contract with pause/emergency functions
+- **TrustEscrowFactory.sol**: Factory contract for creating escrow instances
+
+### Frontend
+
+- **Next.js 14**: React framework with App Router
+- **Wagmi**: React hooks for Ethereum interaction
+- **RainbowKit**: Wallet connection UI
+- **Tailwind CSS**: Utility-first CSS framework
+
+### Network Configuration
+
+- **Hardhat Network**: Local development (Chain ID: 31337)
+- **RPC URL**: `http://127.0.0.1:8545`
+- **Gas Limit**: Auto-calculated
+
+## 🧪 Testing
+
+### Running Tests
+```bash
+cd packages/hardhat
+bun run test
+```
+
+### Test Coverage
+```bash
+cd packages/hardhat
+bun run coverage
+```
+
+## 🚨 Troubleshooting
+
+### Common Issues
+
+1. **"Nonce too high"**: Reset MetaMask account or wait for transaction confirmation
+2. **"User rejected request"**: Transaction was cancelled in wallet
+3. **"Insufficient funds"**: Check wallet balance and gas fees
+4. **Hydration errors**: Refresh page and ensure consistent rendering
+
+### Reset MetaMask Account
+1. Open MetaMask
+2. Go to Settings → Advanced
+3. Click "Reset Account" (this clears transaction history)
+
+### Restart Services
+If issues persist:
+1. Stop all terminals (Ctrl+C)
+2. Restart Hardhat node: `bun run chain`
+3. Redeploy contracts: `bun run deploy`
+4. Restart frontend: `bun run dev`
+
+## 📁 Project Structure
+
+```
+escrow/
+├── packages/
+│   ├── hardhat/          # Smart contracts & deployment
+│   │   ├── contracts/    # Solidity contracts
+│   │   ├── scripts/      # Deployment scripts
+│   │   └── test/         # Contract tests
+│   └── nextjs/           # Frontend application
+│       ├── app/          # Next.js app router
+│       ├── components/   # React components
+│       └── styles/       # CSS styles
+└── README.md
+```
+
+## 🔒 Security Features
+
+- **Reentrancy Protection**: Prevents reentrancy attacks
+- **Pausable**: Emergency pause functionality
+- **Ownable**: Access control for admin functions
+- **Custom Errors**: Gas-efficient error handling
+- **Event Emission**: Transparent transaction tracking
+
+## 🌟 Features
+
+- **Wallet Integration**: MetaMask and other Web3 wallets
+- **Real-time Updates**: Live transaction status
+- **Role-Based Access**: Automatic permission management
+- **Responsive Design**: Mobile and desktop optimized
+- **Dark Theme**: Modern, professional UI
+- **Transaction History**: Complete audit trail
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Add tests for new functionality
+5. Submit a pull request
+
+## 📄 License
+
+This project is licensed under the MIT License.
+
+## 🆘 Support
+
+For issues and questions:
+1. Check the troubleshooting section
+2. Review the smart contract code
+3. Check browser console for errors
+4. Ensure all services are running
+
+---
+
+**Happy Escrowing! 🚀**

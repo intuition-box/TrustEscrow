@@ -38,10 +38,10 @@ describe("TrustEscrow", function () {
 
     it("Should emit EscrowCreated event", async function () {
       const TrustEscrow = await ethers.getContractFactory("TrustEscrow");
-      const tx = TrustEscrow.deploy(depositor.address, beneficiary.address, arbiter.address);
+      const newEscrow = await TrustEscrow.deploy(depositor.address, beneficiary.address, arbiter.address);
 
-      await expect(tx)
-        .to.emit(trustEscrow, "EscrowCreated")
+      await expect(newEscrow.deploymentTransaction())
+        .to.emit(newEscrow, "EscrowCreated")
         .withArgs(depositor.address, beneficiary.address, arbiter.address);
     });
 
@@ -232,20 +232,27 @@ describe("TrustEscrow", function () {
     });
 
     it("Should revert if non-owner tries to pause", async function () {
-      await expect(trustEscrow.connect(otherAccount).pause()).to.be.revertedWith("Ownable: caller is not the owner");
+      await expect(trustEscrow.connect(otherAccount).pause()).to.be.revertedWithCustomError(
+        trustEscrow,
+        "OwnableUnauthorizedAccount",
+      );
     });
 
     it("Should revert if non-owner tries to unpause", async function () {
       await trustEscrow.pause();
 
-      await expect(trustEscrow.connect(otherAccount).unpause()).to.be.revertedWith("Ownable: caller is not the owner");
+      await expect(trustEscrow.connect(otherAccount).unpause()).to.be.revertedWithCustomError(
+        trustEscrow,
+        "OwnableUnauthorizedAccount",
+      );
     });
 
     it("Should revert deposit when paused", async function () {
       await trustEscrow.pause();
 
-      await expect(trustEscrow.connect(depositor).deposit({ value: escrowAmount })).to.be.revertedWith(
-        "Pausable: paused",
+      await expect(trustEscrow.connect(depositor).deposit({ value: escrowAmount })).to.be.revertedWithCustomError(
+        trustEscrow,
+        "EnforcedPause",
       );
     });
   });
@@ -255,15 +262,17 @@ describe("TrustEscrow", function () {
       await trustEscrow.connect(depositor).deposit({ value: escrowAmount });
       await trustEscrow.pause();
 
-      const ownerBalanceBefore = await ethers.provider.getBalance(depositor.address);
+      const contractBalanceBefore = await ethers.provider.getBalance(trustEscrow.target);
+      expect(contractBalanceBefore).to.equal(escrowAmount);
+
       await trustEscrow.emergencyWithdraw();
 
-      const ownerBalanceAfter = await ethers.provider.getBalance(depositor.address);
-      expect(ownerBalanceAfter - ownerBalanceBefore).to.equal(escrowAmount);
+      const contractBalanceAfter = await ethers.provider.getBalance(trustEscrow.target);
+      expect(contractBalanceAfter).to.equal(0);
     });
 
     it("Should revert emergency withdraw when not paused", async function () {
-      await expect(trustEscrow.emergencyWithdraw()).to.be.revertedWith("Pausable: not paused");
+      await expect(trustEscrow.emergencyWithdraw()).to.be.revertedWithCustomError(trustEscrow, "ExpectedPause");
     });
   });
 
@@ -283,7 +292,7 @@ describe("TrustEscrow", function () {
           to: trustEscrow.target,
           value: escrowAmount,
         }),
-      ).to.be.revertedWithCustomError(trustEscrow, "OnlyDepositor");
+      ).to.be.revertedWithCustomError(trustEscrow, "OnlyDepositorCanSendETH");
     });
   });
 });

@@ -12,6 +12,16 @@ import "@openzeppelin/contracts/access/Ownable.sol";
  * @author Your Name
  */
 contract TrustEscrow is ReentrancyGuard, Pausable, Ownable {
+    // Custom errors
+    error InvalidAddress();
+    error OnlyDepositor();
+    error OnlyArbiter();
+    error AlreadyFunded();
+    error NotFunded();
+    error AlreadyReleased();
+    error InvalidAmount();
+    error OnlyDepositorCanSendETH();
+
     address public depositor;
     address public beneficiary;
     address public arbiter;
@@ -26,27 +36,27 @@ contract TrustEscrow is ReentrancyGuard, Pausable, Ownable {
     event EscrowCreated(address indexed depositor, address indexed beneficiary, address indexed arbiter);
 
     modifier onlyDepositor() {
-        require(msg.sender == depositor, "Only depositor can call this function");
+        if (msg.sender != depositor) revert OnlyDepositor();
         _;
     }
 
     modifier onlyArbiter() {
-        require(msg.sender == arbiter, "Only arbiter can call this function");
+        if (msg.sender != arbiter) revert OnlyArbiter();
         _;
     }
 
     modifier notFunded() {
-        require(!isFunded, "Escrow is already funded");
+        if (isFunded) revert AlreadyFunded();
         _;
     }
 
     modifier requireFunded() {
-        require(isFunded, "Escrow is not funded yet");
+        if (!isFunded) revert NotFunded();
         _;
     }
 
     modifier notReleased() {
-        require(!isReleased && !isRefunded, "Escrow has already been resolved");
+        if (isReleased || isRefunded) revert AlreadyReleased();
         _;
     }
 
@@ -57,12 +67,12 @@ contract TrustEscrow is ReentrancyGuard, Pausable, Ownable {
      * @param _arbiter The address that can release or refund funds
      */
     constructor(address _depositor, address _beneficiary, address _arbiter) payable Ownable(_depositor) {
-        require(_depositor != address(0), "Invalid depositor address");
-        require(_beneficiary != address(0), "Invalid beneficiary address");
-        require(_arbiter != address(0), "Invalid arbiter address");
-        require(_beneficiary != _arbiter, "Beneficiary cannot be arbiter");
-        require(_depositor != _beneficiary, "Depositor cannot be beneficiary");
-        require(_depositor != _arbiter, "Depositor cannot be arbiter");
+        if (_depositor == address(0)) revert InvalidAddress();
+        if (_beneficiary == address(0)) revert InvalidAddress();
+        if (_arbiter == address(0)) revert InvalidAddress();
+        if (_beneficiary == _arbiter) revert InvalidAddress();
+        if (_depositor == _beneficiary) revert InvalidAddress();
+        if (_depositor == _arbiter) revert InvalidAddress();
 
         depositor = _depositor;
         beneficiary = _beneficiary;
@@ -75,7 +85,7 @@ contract TrustEscrow is ReentrancyGuard, Pausable, Ownable {
      * @dev Depositor funds the escrow
      */
     function deposit() external payable onlyDepositor notFunded whenNotPaused nonReentrant {
-        require(msg.value > 0, "Deposit amount must be greater than 0");
+        if (msg.value == 0) revert InvalidAmount();
 
         amount = msg.value;
         isFunded = true;
@@ -152,7 +162,14 @@ contract TrustEscrow is ReentrancyGuard, Pausable, Ownable {
     receive() external payable {
         // Only allow deposits from the depositor
         if (msg.sender != depositor) {
-            revert("Only depositor can send ETH directly");
+            revert OnlyDepositorCanSendETH();
+        }
+        
+        // Handle the deposit
+        if (!isFunded) {
+            amount = msg.value;
+            isFunded = true;
+            emit Deposited(depositor, msg.value);
         }
     }
 
