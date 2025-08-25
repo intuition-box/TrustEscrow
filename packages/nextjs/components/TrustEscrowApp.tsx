@@ -806,7 +806,7 @@ export default function TrustEscrowApp() {
               </div>
               <div>
                 <p className="text-sm text-gray-400 mb-1">Amount</p>
-                <p className="font-bold text-lg text-white">{formatEther(currentEscrow.amount)} ETH</p>
+                                  <p className="font-bold text-lg text-white">{formatEther(currentEscrow.amount)} $TRUST</p>
               </div>
               <div>
                 <p className="text-sm text-gray-400 mb-1">Depositor</p>
@@ -955,16 +955,16 @@ export default function TrustEscrowApp() {
       <div className="max-w-4xl lg:max-w-6xl mx-auto space-y-6 lg:space-y-8">
         {/* Page Title and Connection Status */}
         <div className="text-center mb-8 lg:mb-12">
-          <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold mb-4 lg:mb-6 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
-            Trust Escrow Platform
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold mb-4 lg:mb-6 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent animate-pulse">
+            🚀 Trust Escrow Platform
           </h1>
           <p className="text-gray-300 text-base sm:text-lg lg:text-xl mb-6 lg:mb-8">Secure Decentralized Escrow System</p>
 
           {/* Connection Status */}
-          <div className="inline-flex items-center gap-3 bg-muted px-4 sm:px-6 lg:px-8 py-3 lg:py-4 rounded-xl border backdrop-blur-sm">
-            <div className="w-3 h-3 bg-green-400 rounded-full pulse"></div>
+          <div className="inline-flex items-center gap-3 bg-muted px-4 sm:px-6 lg:px-8 py-3 lg:py-4 rounded-xl border backdrop-blur-sm hover:scale-105 transition-transform">
+            <div className="w-3 h-3 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full pulse shadow-lg shadow-green-400/50"></div>
             <span className="text-sm lg:text-base text-gray-300">Connected:</span>
-            <span className="text-sm lg:text-base font-mono text-white font-semibold">
+            <span className="text-sm lg:text-base font-mono text-white font-semibold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
               {userAddress?.slice(0, 6)}...{userAddress?.slice(-4)}
             </span>
           </div>
@@ -1012,26 +1012,24 @@ export default function TrustEscrowApp() {
                 </div>
               </div>
             </div>
-            <div className="flex flex-col gap-3 w-full lg:w-auto">
+            <div className="flex flex-col gap-3 w-full lg:w-auto lg:min-w-0">
               <div className="flex flex-col sm:flex-row gap-3">
                 <button
                   onClick={() => setActiveTab("create")}
-                  className={`btn px-4 sm:px-6 lg:px-8 w-full sm:w-auto ${activeTab === "create" ? "btn-primary" : "btn-secondary"}`}
+                  className={`btn px-4 sm:px-6 lg:px-4 xl:px-6 w-full sm:w-auto lg:w-1/2 lg:whitespace-nowrap ${activeTab === "create" ? "btn-primary" : "btn-secondary"}`}
                 >
                   Create Escrow
                 </button>
+              </div>
+              <div className="flex flex-wrap gap-2">
                 <button
                   onClick={() => setActiveTab("view")}
-                  className={`btn px-4 sm:px-6 lg:px-8 w-full sm:w-auto ${activeTab === "view" ? "btn-primary" : "btn-secondary"}`}
+                  className={`btn px-4 sm:px-6 lg:px-4 xl:px-6 w-full sm:w-auto lg:whitespace-nowrap ${activeTab === "view" ? "btn-primary" : "btn-secondary"}`}
                 >
                   View Escrow
                 </button>
               </div>
-              <div className="flex flex-wrap gap-2">
-                <button onClick={() => window.location.reload()} className="btn btn-secondary btn-sm w-full sm:w-auto">
-                  🔄 Refresh
-                </button>
-              </div>
+
             </div>
           </div>
         </div>
@@ -1049,7 +1047,7 @@ export default function TrustEscrowApp() {
               <ul className="text-xs lg:text-sm text-blue-300 space-y-1 lg:space-y-2">
                 <li>• You cannot be the beneficiary or arbiter of your own escrow</li>
                 <li>• Beneficiary and arbiter must be different addresses</li>
-                <li>• All addresses must be valid Ethereum addresses</li>
+                <li>• All addresses must be valid TRUST addresses</li>
                 <li>• Amount must be greater than 0</li>
               </ul>
             </div>
@@ -1081,7 +1079,7 @@ export default function TrustEscrowApp() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium mb-2 text-white">Amount (ETH)</label>
+                  <label className="block text-sm font-medium mb-2 text-white">Amount ($TRUST)</label>
                   <input
                     type="text"
                     className="input w-full"
@@ -1143,45 +1141,7 @@ export default function TrustEscrowApp() {
                        : "🚀 Create & Fund Escrow"}
                </button>
 
-              {/* Quick Test Addresses */}
-              <div className="bg-gray-900/20 border border-gray-700 p-4 rounded-lg">
-                <p className="text-sm text-gray-300 mb-3 font-semibold">🧪 Quick Test Addresses (Hardhat Network)</p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
-                  <div className="bg-muted p-3 rounded-lg border">
-                    <span className="text-gray-400 text-xs">Beneficiary:</span>
-                    <button
-                      type="button"
-                      onClick={() =>
-                        setEscrowData(prev => ({
-                          ...prev,
-                          beneficiaryAddress: "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
-                        }))
-                      }
-                      className="block w-full mt-1 text-blue-400 hover:text-blue-300 underline text-xs font-mono"
-                    >
-                      0x7099...79C8
-                    </button>
-                  </div>
-                  <div className="bg-muted p-3 rounded-lg border">
-                    <span className="text-gray-400 text-xs">Arbiter:</span>
-                    <button
-                      type="button"
-                      onClick={() =>
-                        setEscrowData(prev => ({
-                          ...prev,
-                          arbiterAddress: "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC",
-                        }))
-                      }
-                      className="block w-full mt-1 text-blue-400 hover:text-blue-300 underline text-xs font-mono"
-                    >
-                      0x3C44...93BC
-                    </button>
-                  </div>
-                </div>
-                <div className="text-gray-400 text-xs mt-3 text-center">
-                  💡 These addresses are different from your wallet and from each other
-                </div>
-              </div>
+
             </form>
           </div>
         )}

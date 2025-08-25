@@ -1,8 +1,8 @@
 /* Trust Escrow Custom Styles */
 
-/* Global theme - modern dark with gradients */
+/* Global theme - modern dark with enhanced gradients */
 html, body {
-  background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%) !important;
+  background: linear-gradient(135deg, #0a0a0f 0%, #1a0b2e 25%, #16213e 50%, #0f3460 75%, #533483 100%) !important;
   color: #ffffff !important;
   min-height: 100vh;
 }
@@ -22,7 +22,7 @@ html, body {
 /* Main content area */
 main {
   flex: 1;
-  background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+  background: linear-gradient(135deg, #0a0a0f 0%, #1a0b2e 25%, #16213e 50%, #0f3460 75%, #533483 100%);
   position: relative;
   z-index: 1;
 }
@@ -198,29 +198,199 @@ main {
   }
 }
 
-/* Modern card colors with gradients */
+/* Enhanced modern card colors with vibrant gradients */
 .bg-card { 
-  background: linear-gradient(145deg, #1a1a2e 0%, #16213e 100%);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(145deg, rgba(26, 11, 46, 0.9) 0%, rgba(22, 33, 62, 0.95) 50%, rgba(15, 52, 96, 0.9) 100%);
+  border: 1px solid rgba(147, 51, 234, 0.3);
+  backdrop-filter: blur(20px);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(147, 51, 234, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.bg-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(147, 51, 234, 0.5), transparent);
+  animation: shimmer 3s ease-in-out infinite;
 }
 
 .bg-muted { 
-  background: linear-gradient(145deg, #16213e 0%, #0f3460 100%);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: linear-gradient(145deg, rgba(15, 52, 96, 0.8) 0%, rgba(83, 52, 131, 0.9) 100%);
+  border: 1px solid rgba(147, 51, 234, 0.2);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
 }
 
 .text-muted-foreground { 
-  color: #888888; 
+  color: #a8b2d1; 
 }
 
 .border { 
-  border-color: #333333; 
+  border-color: rgba(147, 51, 234, 0.3); 
 }
 
 .hover\:bg-accent:hover { 
-  background-color: #1a1a1a; 
+  background: linear-gradient(145deg, rgba(147, 51, 234, 0.1) 0%, rgba(236, 72, 153, 0.1) 100%);
+  border-color: rgba(147, 51, 234, 0.4);
+  transform: translateY(-2px);
+  transition: all 0.3s ease;
+}
+
+/* Enhanced button styles */
+.btn-primary {
+  background: linear-gradient(135deg, #9333ea 0%, #ec4899 50%, #f59e0b 100%);
+  border: none;
+  box-shadow: 
+    0 4px 16px rgba(147, 51, 234, 0.4),
+    0 0 0 1px rgba(147, 51, 234, 0.2);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #a855f7 0%, #f472b6 50%, #fbbf24 100%);
+  box-shadow: 
+    0 8px 24px rgba(147, 51, 234, 0.6),
+    0 0 0 1px rgba(147, 51, 234, 0.4);
+  transform: translateY(-2px);
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.btn-primary:hover::before {
+  left: 100%;
+}
+
+.btn-secondary {
+  background: linear-gradient(135deg, rgba(147, 51, 234, 0.1) 0%, rgba(236, 72, 153, 0.1) 100%);
+  border: 1px solid rgba(147, 51, 234, 0.3);
+  color: #e2e8f0;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background: linear-gradient(135deg, rgba(147, 51, 234, 0.2) 0%, rgba(236, 72, 153, 0.2) 100%);
+  border-color: rgba(147, 51, 234, 0.5);
+  color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(147, 51, 234, 0.3);
+}
+
+/* Enhanced input styles */
+.input {
+  background: linear-gradient(145deg, rgba(15, 52, 96, 0.6) 0%, rgba(83, 52, 131, 0.6) 100%);
+  border: 1px solid rgba(147, 51, 234, 0.3);
+  backdrop-filter: blur(10px);
+  color: #ffffff;
+  transition: all 0.3s ease;
+}
+
+.input:focus {
+  border-color: rgba(147, 51, 234, 0.6);
+  box-shadow: 
+    0 0 0 3px rgba(147, 51, 234, 0.1),
+    0 4px 12px rgba(147, 51, 234, 0.2);
+  background: linear-gradient(145deg, rgba(15, 52, 96, 0.8) 0%, rgba(83, 52, 131, 0.8) 100%);
+}
+
+/* Enhanced text gradients */
+.bg-gradient-to-r.from-blue-400.to-purple-500 {
+  background: linear-gradient(135deg, #60a5fa 0%, #a855f7 25%, #ec4899 50%, #f59e0b 75%, #10b981 100%);
+  background-size: 200% 200%;
+  animation: gradientShift 4s ease-in-out infinite;
+}
+
+/* Enhanced animations */
+@keyframes shimmer {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.1); }
+}
+
+/* Enhanced status indicators */
+.pulse {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* Enhanced scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(15, 52, 96, 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #9333ea 0%, #ec4899 100%);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #a855f7 0%, #f472b6 100%);
+}
+
+/* Enhanced focus states */
+*:focus {
+  outline: 2px solid rgba(147, 51, 234, 0.5);
+  outline-offset: 2px;
+}
+
+/* Enhanced selection */
+::selection {
+  background: rgba(147, 51, 234, 0.3);
+  color: #ffffff;
+}
+
+/* Enhanced loading states */
+.loading {
+  position: relative;
+  overflow: hidden;
+}
+
+.loading::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  animation: loading 1.5s ease-in-out infinite;
+}
+
+@keyframes loading {
+  0% { left: -100%; }
+  100% { left: 100%; }
 }
 
 /* Button styles */

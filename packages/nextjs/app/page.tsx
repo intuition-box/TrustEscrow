@@ -18,7 +18,7 @@ const Home: NextPage = () => {
             <span className="block text-4xl font-bold text-primary">TrustEscrow</span>
           </h1>
           <p className="text-center text-lg mt-4 text-base-content/80">
-            A secure, decentralized escrow platform built on Ethereum
+            A secure, decentralized escrow platform built on TRUST
           </p>
 
           <div className="flex justify-center items-center space-x-2 flex-col mt-6">

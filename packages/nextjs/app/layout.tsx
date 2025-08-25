@@ -7,7 +7,7 @@ import { getMetadata } from "~~/utils/scaffold-eth/getMetadata";
 
 export const metadata = getMetadata({
   title: "TrustEscrow - Secure Decentralized Escrow Platform",
-  description: "A secure, decentralized escrow platform built on Ethereum with smart contract protection",
+  description: "A secure, decentralized escrow platform built on TRUST with smart contract protection",
 });
 
 const ScaffoldEthApp = ({ children }: { children: React.ReactNode }) => {
