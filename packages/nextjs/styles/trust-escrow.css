@@ -27,6 +27,177 @@ main {
   z-index: 1;
 }
 
+/* Desktop-specific improvements */
+@media (min-width: 1024px) {
+  /* Better spacing for desktop */
+  .max-w-4xl {
+    max-width: 80rem;
+    padding: 0 3rem;
+  }
+  
+  /* Improved card spacing */
+  .bg-card {
+    padding: 2.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  /* Better grid layouts for desktop */
+  .grid-cols-1.lg\:grid-cols-2 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+  
+  .grid-cols-1.lg\:grid-cols-3 {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+  
+  /* Improved button sizing for desktop */
+  .btn {
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    min-height: 3rem;
+  }
+  
+  .btn-sm {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    min-height: 2.5rem;
+  }
+  
+  /* Better input sizing for desktop */
+  .input {
+    padding: 1rem 1.25rem;
+    font-size: 1rem;
+    min-height: 3rem;
+  }
+  
+  /* Improved typography for desktop */
+  .text-2xl {
+    font-size: 1.75rem;
+  }
+  
+  .text-3xl {
+    font-size: 2.25rem;
+  }
+  
+  .text-4xl {
+    font-size: 3rem;
+  }
+  
+  /* Better spacing for desktop */
+  .space-y-6 > * + * {
+    margin-top: 2rem;
+  }
+  
+  .space-y-8 > * + * {
+    margin-top: 3rem;
+  }
+  
+  /* Improved container spacing */
+  .p-4 {
+    padding: 2rem;
+  }
+  
+  .p-6 {
+    padding: 3rem;
+  }
+  
+  .mb-6 {
+    margin-bottom: 2rem;
+  }
+  
+  .mb-8 {
+    margin-bottom: 3rem;
+  }
+  
+  /* Better form layout for desktop */
+  .grid.grid-cols-1.lg\:grid-cols-2 {
+    gap: 2rem;
+  }
+  
+  /* Improved modal sizing for desktop */
+  .max-w-md {
+    max-width: 32rem;
+  }
+  
+  /* Better navigation spacing */
+  .navbar {
+    padding: 0 2rem;
+  }
+  
+  /* Improved footer spacing */
+  footer {
+    padding: 2rem 0;
+  }
+}
+
+/* Large desktop improvements */
+@media (min-width: 1280px) {
+  .max-w-4xl {
+    max-width: 90rem;
+    padding: 0 4rem;
+  }
+  
+  .bg-card {
+    padding: 3rem;
+  }
+  
+  .btn {
+    padding: 1.25rem 2.5rem;
+    font-size: 1.125rem;
+  }
+  
+  .input {
+    padding: 1.25rem 1.5rem;
+    font-size: 1.125rem;
+  }
+}
+
+/* Extra large desktop improvements */
+@media (min-width: 1536px) {
+  .max-w-4xl {
+    max-width: 100rem;
+    padding: 0 5rem;
+  }
+  
+  .bg-card {
+    padding: 3.5rem;
+  }
+  
+  .btn {
+    padding: 1.5rem 3rem;
+    font-size: 1.25rem;
+  }
+  
+  .input {
+    padding: 1.5rem 2rem;
+    font-size: 1.25rem;
+  }
+  
+  /* Better visual hierarchy for large screens */
+  .text-4xl {
+    font-size: 3.5rem;
+  }
+  
+  .text-5xl {
+    font-size: 4rem;
+  }
+  
+  /* Improved spacing for large screens */
+  .space-y-8 > * + * {
+    margin-top: 4rem;
+  }
+  
+  .mb-8 {
+    margin-bottom: 4rem;
+  }
+  
+  .p-8 {
+    padding: 4rem;
+  }
+}
+
 /* Modern card colors with gradients */
 .bg-card { 
   background: linear-gradient(145deg, #1a1a2e 0%, #16213e 100%);

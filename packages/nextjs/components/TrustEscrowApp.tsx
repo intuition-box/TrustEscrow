@@ -951,20 +951,20 @@ export default function TrustEscrowApp() {
   }
 
   return (
-    <div className="text-white p-4 sm:p-6 fade-in">
-      <div className="max-w-4xl mx-auto space-y-6">
+    <div className="text-white p-4 sm:p-6 lg:p-8 fade-in">
+      <div className="max-w-4xl lg:max-w-6xl mx-auto space-y-6 lg:space-y-8">
         {/* Page Title and Connection Status */}
-        <div className="text-center mb-8">
-          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+        <div className="text-center mb-8 lg:mb-12">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold mb-4 lg:mb-6 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
             Trust Escrow Platform
           </h1>
-          <p className="text-gray-300 text-base sm:text-lg mb-6">Secure Decentralized Escrow System</p>
+          <p className="text-gray-300 text-base sm:text-lg lg:text-xl mb-6 lg:mb-8">Secure Decentralized Escrow System</p>
 
           {/* Connection Status */}
-          <div className="inline-flex items-center gap-3 bg-muted px-4 sm:px-6 py-3 rounded-xl border backdrop-blur-sm">
+          <div className="inline-flex items-center gap-3 bg-muted px-4 sm:px-6 lg:px-8 py-3 lg:py-4 rounded-xl border backdrop-blur-sm">
             <div className="w-3 h-3 bg-green-400 rounded-full pulse"></div>
-            <span className="text-sm text-gray-300">Connected:</span>
-            <span className="text-sm font-mono text-white font-semibold">
+            <span className="text-sm lg:text-base text-gray-300">Connected:</span>
+            <span className="text-sm lg:text-base font-mono text-white font-semibold">
               {userAddress?.slice(0, 6)}...{userAddress?.slice(-4)}
             </span>
           </div>
@@ -992,12 +992,12 @@ export default function TrustEscrowApp() {
 
         {/* Contract Status and Navigation */}
         <div className="bg-card border p-4 sm:p-6 lg:p-8 rounded-xl slide-in-right">
-          <div className="flex flex-col lg:flex-row lg:justify-between lg:items-start gap-6">
+          <div className="flex flex-col lg:flex-row lg:justify-between lg:items-start gap-6 lg:gap-8">
             <div className="flex-1">
-              <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-white mb-6 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+              <h3 className="text-lg sm:text-xl lg:text-2xl xl:text-3xl font-bold text-white mb-6 lg:mb-8 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
                 Contract Status
               </h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6 text-sm text-gray-300">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6 text-sm lg:text-base text-gray-300">
                 <div className="bg-muted p-4 rounded-xl border backdrop-blur-sm hover:scale-105 transition-transform">
                   <span className="font-semibold text-blue-400">Total Escrows:</span>
                   <span className="ml-2 text-white font-mono text-lg">
@@ -1038,15 +1038,15 @@ export default function TrustEscrowApp() {
 
         {/* Create Escrow Tab */}
         {activeTab === "create" && (
-          <div className="bg-card border p-4 sm:p-6 rounded-xl">
-            <h2 className="text-lg sm:text-xl lg:text-2xl font-bold mb-6 text-white bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+          <div className="bg-card border p-4 sm:p-6 lg:p-8 rounded-xl">
+            <h2 className="text-lg sm:text-xl lg:text-2xl xl:text-3xl font-bold mb-6 lg:mb-8 text-white bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
               Create New Escrow
             </h2>
 
             {/* Validation Rules Info */}
-            <div className="bg-blue-900/20 border border-blue-700 p-4 rounded-lg mb-6">
-              <h3 className="text-sm font-semibold text-blue-300 mb-2">📋 Escrow Rules</h3>
-              <ul className="text-xs text-blue-300 space-y-1">
+            <div className="bg-blue-900/20 border border-blue-700 p-4 lg:p-6 rounded-lg mb-6 lg:mb-8">
+              <h3 className="text-sm lg:text-base font-semibold text-blue-300 mb-2 lg:mb-3">📋 Escrow Rules</h3>
+              <ul className="text-xs lg:text-sm text-blue-300 space-y-1 lg:space-y-2">
                 <li>• You cannot be the beneficiary or arbiter of your own escrow</li>
                 <li>• Beneficiary and arbiter must be different addresses</li>
                 <li>• All addresses must be valid Ethereum addresses</li>
@@ -1054,10 +1054,10 @@ export default function TrustEscrowApp() {
               </ul>
             </div>
 
-            <form onSubmit={handleCreateEscrow} className="space-y-6">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6">
+            <form onSubmit={handleCreateEscrow} className="space-y-6 lg:space-y-8">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-8">
                 <div>
-                  <label className="block text-sm font-medium mb-2 text-white">Escrow Title</label>
+                  <label className="block text-sm lg:text-base font-medium mb-2 lg:mb-3 text-white">Escrow Title</label>
                   <input
                     type="text"
                     className="input w-full"
@@ -1129,19 +1129,19 @@ export default function TrustEscrowApp() {
                 </div>
               </div>
 
-              <button
-                type="submit"
-                disabled={loading || extractingAddress || funding}
-                className="btn btn-primary w-full text-lg py-4"
-              >
-                {loading
-                  ? "Creating Escrow..."
-                  : extractingAddress
-                    ? "Extracting Address..."
-                    : funding
-                      ? "Funding Escrow..."
-                      : "🚀 Create & Fund Escrow"}
-              </button>
+                             <button
+                 type="submit"
+                 disabled={loading || extractingAddress || funding}
+                 className="btn btn-primary w-full lg:w-auto text-lg lg:text-xl py-4 lg:py-6 px-8 lg:px-12"
+               >
+                 {loading
+                   ? "Creating Escrow..."
+                   : extractingAddress
+                     ? "Extracting Address..."
+                     : funding
+                       ? "Funding Escrow..."
+                       : "🚀 Create & Fund Escrow"}
+               </button>
 
               {/* Quick Test Addresses */}
               <div className="bg-gray-900/20 border border-gray-700 p-4 rounded-lg">
@@ -1188,8 +1188,8 @@ export default function TrustEscrowApp() {
 
         {/* View Escrow Tab */}
         {activeTab === "view" && (
-          <div className="bg-card border p-4 sm:p-6 rounded-xl">
-            <h2 className="text-lg sm:text-xl lg:text-2xl font-bold mb-6 text-white bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+          <div className="bg-card border p-4 sm:p-6 lg:p-8 rounded-xl">
+            <h2 className="text-lg sm:text-xl lg:text-2xl xl:text-3xl font-bold mb-6 lg:mb-8 text-white bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
               View Escrow by Address
             </h2>
             <div className="space-y-6">
