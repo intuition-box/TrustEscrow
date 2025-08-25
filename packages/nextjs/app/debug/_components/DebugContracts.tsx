@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useSessionStorage } from "usehooks-ts";
 import { BarsArrowUpIcon } from "@heroicons/react/20/solid";
 import { ContractUI } from "~~/app/debug/_components/contract";
@@ -11,6 +11,8 @@ const selectedContractStorageKey = "scaffoldEth2.selectedContract";
 
 export function DebugContracts() {
   const contractsData = useAllContracts();
+  const [isClient, setIsClient] = useState(false);
+
   const contractNames = useMemo(
     () =>
       Object.keys(contractsData).sort((a, b) => {
@@ -19,17 +21,32 @@ export function DebugContracts() {
     [contractsData],
   );
 
+  // Only use sessionStorage on the client side
   const [selectedContract, setSelectedContract] = useSessionStorage<ContractName>(
     selectedContractStorageKey,
     contractNames[0],
     { initializeWithValue: false },
   );
 
+  // Set client flag after mount
   useEffect(() => {
-    if (!contractNames.includes(selectedContract)) {
+    setIsClient(true);
+  }, []);
+
+  useEffect(() => {
+    if (isClient && !contractNames.includes(selectedContract)) {
       setSelectedContract(contractNames[0]);
     }
-  }, [contractNames, selectedContract, setSelectedContract]);
+  }, [contractNames, selectedContract, setSelectedContract, isClient]);
+
+  // Don't render until client-side
+  if (!isClient) {
+    return (
+      <div className="flex flex-col gap-y-6 lg:gap-y-8 py-8 lg:py-12 justify-center items-center">
+        <p className="text-3xl mt-14">Loading...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col gap-y-6 lg:gap-y-8 py-8 lg:py-12 justify-center items-center">

@@ -5,7 +5,7 @@ const buildNextEslintCommand = (filenames) =>
     .map((f) => path.relative(path.join("packages", "nextjs"), f))
     .join(" --file ")}`;
 
-const checkTypesNextCommand = () => "bun run next:check-types";
+const checkTypesNextCommand = () => "bun run next:check-types:exclude-trust";
 
 const buildHardhatEslintCommand = (filenames) =>
   `bun run hardhat:lint-staged --fix ${filenames

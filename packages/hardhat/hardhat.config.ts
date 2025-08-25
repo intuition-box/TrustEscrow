@@ -37,7 +37,7 @@ const config: HardhatUserConfig = {
       },
     ],
   },
-  defaultNetwork: "localhost",
+  defaultNetwork: "intuition",
   namedAccounts: {
     deployer: {
       // By default, it will take the first Hardhat account as the deployer
@@ -124,6 +124,11 @@ const config: HardhatUserConfig = {
     celoAlfajores: {
       url: "https://alfajores-forno.celo-testnet.org",
       accounts: [deployerPrivateKey],
+    },
+    intuition: {
+      url: "https://testnet.rpc.intuition.systems",
+      accounts: [deployerPrivateKey],
+      chainId: 13579,
     },
   },
   // Configuration for harhdat-verify plugin

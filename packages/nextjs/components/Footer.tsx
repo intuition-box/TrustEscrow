@@ -43,7 +43,7 @@ export const Footer = () => {
   }
 
   return (
-    <div className="min-h-0 py-5 px-1 mb-11 lg:mb-0">
+    <div className="min-h-0 py-5 px-1 mb-11 lg:mb-0 bg-black border-t border-gray-800">
       <div>
         <div className="fixed flex justify-between items-center w-full z-10 p-4 bottom-0 left-0 pointer-events-none">
           <div className="flex flex-col md:flex-row gap-2 pointer-events-auto">
@@ -70,15 +70,20 @@ export const Footer = () => {
       </div>
       <div className="w-full">
         <ul className="menu menu-horizontal w-full">
-          <div className="flex justify-center items-center gap-2 text-sm w-full">
+          <div className="flex justify-center items-center gap-2 text-sm w-full text-gray-300">
             <div className="text-center">
-              <a href="https://github.com/scaffold-eth/se-2" target="_blank" rel="noreferrer" className="link">
+              <a
+                href="https://github.com/scaffold-eth/se-2"
+                target="_blank"
+                rel="noreferrer"
+                className="link text-gray-300 hover:text-white"
+              >
                 TrustEscrow
               </a>
             </div>
-            <span>·</span>
+            <span className="text-gray-500">·</span>
             <div className="flex justify-center items-center gap-2">
-              <p className="m-0 text-center">
+              <p className="m-0 text-center text-gray-300">
                 Built with <HeartIcon className="inline-block h-4 w-4" /> at
               </p>
               <a
@@ -88,12 +93,17 @@ export const Footer = () => {
                 rel="noreferrer"
               >
                 <BuidlGuidlLogo className="w-3 h-5 pb-1" />
-                <span className="link">BuidlGuidl</span>
+                <span className="link text-gray-300 hover:text-white">BuidlGuidl</span>
               </a>
             </div>
-            <span>·</span>
+            <span className="text-gray-500">·</span>
             <div className="text-center">
-              <a href="https://t.me/joinchat/KByvmRe5wkR-8F_zz6AjpA" target="_blank" rel="noreferrer" className="link">
+              <a
+                href="https://t.me/joinchat/KByvmRe5wkR-8F_zz6AjpA"
+                target="_blank"
+                rel="noreferrer"
+                className="link text-gray-300 hover:text-white"
+              >
                 Support
               </a>
             </div>

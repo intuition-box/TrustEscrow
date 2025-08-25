@@ -5,9 +5,9 @@
 import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract";
 
 const deployedContracts = {
-  31337: {
+  13579: {
     TrustEscrow: {
-      address: "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+      address: "0xAc40224a6f9AD24cc44cd9dA4255b45584e69AB7",
       abi: [
         {
           inputs: [
@@ -471,10 +471,10 @@ const deployedContracts = {
         renounceOwnership: "@openzeppelin/contracts/access/Ownable.sol",
         transferOwnership: "@openzeppelin/contracts/access/Ownable.sol",
       },
-      deployedOnBlock: 3,
+      deployedOnBlock: 1351846,
     },
     TrustEscrowFactory: {
-      address: "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0",
+      address: "0x2d3d83B06d7f2cb85A86a24F71366D62A39859cC",
       abi: [
         {
           inputs: [],
@@ -1005,10 +1005,10 @@ const deployedContracts = {
         transferOwnership: "@openzeppelin/contracts/access/Ownable.sol",
         paused: "@openzeppelin/contracts/utils/Pausable.sol",
       },
-      deployedOnBlock: 4,
+      deployedOnBlock: 1351851,
     },
     YourContract: {
-      address: "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+      address: "0x002Eb77712B59dd3aa4F2ADBEc56A914A8dCbBCB",
       abi: [
         {
           inputs: [
@@ -1149,7 +1149,7 @@ const deployedContracts = {
         },
       ],
       inheritedFunctions: {},
-      deployedOnBlock: 1,
+      deployedOnBlock: 1351841,
     },
   },
 } as const;

@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { rainbowkitBurnerWallet } from "burner-connector";
 import { ShieldExclamationIcon } from "@heroicons/react/24/outline";
 import { useCopyToClipboard } from "~~/hooks/scaffold-eth";
@@ -9,8 +9,16 @@ const BURNER_WALLET_PK_KEY = "burnerWallet.pk";
 export const RevealBurnerPKModal = () => {
   const { copyToClipboard, isCopiedToClipboard } = useCopyToClipboard();
   const modalCheckboxRef = useRef<HTMLInputElement>(null);
+  const [isClient, setIsClient] = useState(false);
+
+  // Set client flag after mount
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   const handleCopyPK = async () => {
+    if (!isClient) return;
+
     try {
       const storage = rainbowkitBurnerWallet.useSessionStorage ? sessionStorage : localStorage;
       const burnerPK = storage?.getItem(BURNER_WALLET_PK_KEY);
@@ -23,6 +31,11 @@ export const RevealBurnerPKModal = () => {
       if (modalCheckboxRef.current) modalCheckboxRef.current.checked = false;
     }
   };
+
+  // Don't render until client-side
+  if (!isClient) {
+    return null;
+  }
 
   return (
     <>
