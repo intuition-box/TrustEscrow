@@ -955,16 +955,16 @@ export default function TrustEscrowApp() {
       <div className="max-w-4xl lg:max-w-6xl mx-auto space-y-6 lg:space-y-8">
         {/* Page Title and Connection Status */}
         <div className="text-center mb-8 lg:mb-12">
-          <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold mb-4 lg:mb-6 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent animate-pulse">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold mb-4 lg:mb-6 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
             🚀 Trust Escrow Platform
           </h1>
           <p className="text-gray-300 text-base sm:text-lg lg:text-xl mb-6 lg:mb-8">Secure Decentralized Escrow System</p>
 
           {/* Connection Status */}
-          <div className="inline-flex items-center gap-3 bg-muted px-4 sm:px-6 lg:px-8 py-3 lg:py-4 rounded-xl border backdrop-blur-sm hover:scale-105 transition-transform">
-            <div className="w-3 h-3 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full pulse shadow-lg shadow-green-400/50"></div>
+          <div className="inline-flex items-center gap-3 bg-muted px-4 sm:px-6 lg:px-8 py-3 lg:py-4 rounded-xl border backdrop-blur-sm">
+            <div className="w-3 h-3 bg-green-400 rounded-full pulse"></div>
             <span className="text-sm lg:text-base text-gray-300">Connected:</span>
-            <span className="text-sm lg:text-base font-mono text-white font-semibold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+            <span className="text-sm lg:text-base font-mono text-white font-semibold">
               {userAddress?.slice(0, 6)}...{userAddress?.slice(-4)}
             </span>
           </div>
