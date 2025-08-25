@@ -179,7 +179,7 @@ export default function TrustEscrowApp() {
   // Check if contracts are available on the current network
   if (!contractsAvailable) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 flex items-center justify-center p-4">
+      <div className="flex items-center justify-center p-4 min-h-[calc(100vh-200px)]">
         <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 max-w-md w-full text-center">
           <div className="text-red-400 text-6xl mb-4">⚠️</div>
           <h1 className="text-2xl font-bold text-white mb-4">Contracts Not Deployed</h1>
@@ -780,7 +780,7 @@ export default function TrustEscrowApp() {
     const role = getUserRole(currentEscrow);
 
     return (
-      <div className="min-h-screen text-white p-4 sm:p-6">
+      <div className="text-white p-4 sm:p-6">
         <div className="max-w-4xl mx-auto">
           {/* Page Header */}
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 p-4 sm:p-6 bg-card border rounded-xl">
@@ -882,7 +882,7 @@ export default function TrustEscrowApp() {
 
   if (!isConnected) {
     return (
-      <div className="min-h-screen text-white p-4 sm:p-6">
+      <div className="text-white p-4 sm:p-6">
         <div className="max-w-4xl mx-auto">
           {/* Welcome Screen */}
           <div className="text-center mb-8">
@@ -951,7 +951,7 @@ export default function TrustEscrowApp() {
   }
 
   return (
-    <div className="min-h-screen text-white p-4 sm:p-6 fade-in">
+    <div className="text-white p-4 sm:p-6 fade-in">
       <div className="max-w-4xl mx-auto space-y-6">
         {/* Page Title and Connection Status */}
         <div className="text-center mb-8">
