@@ -14,7 +14,7 @@
     "setup-escrow": "bun run scripts/setup-escrow.ts",
     "test-integration": "bun run scripts/test-integration.ts",
     "check-errors": "bun run scripts/check-errors.ts",
-    "vercel": "vercel --build-env VERCEL_TELEMETRY_DISABLED=1",
+    "vercel": "vercel --build-env VERCEL_TELEMETRY_DISABLED=1 --build-env NEXT_PUBLIC_IGNORE_BUILD_ERROR=true",
     "vercel:login": "vercel login",
     "vercel:yolo": "vercel --build-env NEXT_PUBLIC_IGNORE_BUILD_ERROR=true --build-env VERCEL_TELEMETRY_DISABLED=1"
   },

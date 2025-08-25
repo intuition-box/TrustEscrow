@@ -1,5 +1,10 @@
+import { Suspense } from "react";
 import TrustEscrowApp from "../../components/TrustEscrowApp";
 
 export default function EscrowPage() {
-  return <TrustEscrowApp />;
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <TrustEscrowApp />
+    </Suspense>
+  );
 }

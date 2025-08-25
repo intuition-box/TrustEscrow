@@ -32,6 +32,12 @@ const nextConfig: NextConfig = {
       'indexeddb': false,
     };
     
+    // Add fallback for indexedDB
+    config.resolve.fallback = {
+      ...config.resolve.fallback,
+      'indexeddb': false,
+    };
+    
     return config;
   },
 };

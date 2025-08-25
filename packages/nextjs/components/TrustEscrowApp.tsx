@@ -102,6 +102,7 @@ export default function TrustEscrowApp() {
     address: contractsAvailable ? (FACTORY_ADDRESS as `0x${string}`) : undefined,
     abi: contractsAvailable ? (FACTORY_ABI as any) : undefined,
     functionName: "getEscrowCount",
+    args: [],
   });
 
   const loadSpecificEscrow = useCallback(
@@ -126,6 +127,7 @@ export default function TrustEscrowApp() {
           address: address as `0x${string}`,
           abi: ESCROW_ABI as any,
           functionName: "getEscrowStatus",
+          args: [],
         })) as any;
 
         console.log("Real escrow status:", escrowStatus);
@@ -254,6 +256,7 @@ export default function TrustEscrowApp() {
           address: FACTORY_ADDRESS as `0x${string}`,
           abi: FACTORY_ABI,
           functionName: "getEscrowCount",
+          args: [],
         });
 
         console.log("Current escrow count:", escrowCount);
