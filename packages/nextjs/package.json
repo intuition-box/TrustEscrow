@@ -13,8 +13,12 @@
     "generate-abis": "bun run scripts/generate-abis.ts",
     "setup-escrow": "bun run scripts/setup-escrow.ts",
     "test-integration": "bun run scripts/test-integration.ts",
-    "check-errors": "bun run scripts/check-errors.ts"
+    "check-errors": "bun run scripts/check-errors.ts",
+    "vercel": "vercel --build-env VERCEL_TELEMETRY_DISABLED=1",
+    "vercel:login": "vercel login",
+    "vercel:yolo": "vercel --build-env NEXT_PUBLIC_IGNORE_BUILD_ERROR=true --build-env VERCEL_TELEMETRY_DISABLED=1"
   },
+  
   "dependencies": {
     "@heroicons/react": "~2.1.5",
     "@rainbow-me/rainbowkit": "2.2.7",
